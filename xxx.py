@@ -39,8 +39,34 @@ def myplot(df, x_col, y_col, color_field):
     fig.set_ylabel(y_col)
     fig.set_title(x_col + " vs. " + y_col)
     fig=plt.gcf()
-    fig.set_size_inches(10,6)
+    fig.set_size_inches(10, 6)
     plt.show()
+
+def myplot3(df, x_col, y_col, color_field):
+    fig = df[df[color_field] == 0].plot(kind='scatter', x=x_col, y=y_col, color='orange', label='Female')
+    df[df[color_field] == 1].plot(kind='scatter', x=x_col, y=y_col, color='blue', label='Male', ax=fig)
+    fig.set_xlabel(x_col)
+    fig.set_ylabel(y_col)
+    fig.set_title(x_col + " vs. " + y_col)
+    fig=plt.gcf()
+    fig.set_size_inches(10, 6)
+    plt.show()
+
+def myplot2(df, x_col, y_col, color_field):
+    cl = df[color_field].unique()
+    col = ['orange', 'blue', 'red', 'yellow', 'black', 'brown']
+
+    fig = df[df[color_field] == cl[0]].plot(kind='scatter', x=x_col, y=y_col, color=col[0], label=cl[0])
+    for i in range(len(cl)-1):
+        df[df[color_field] == cl[i+1]].plot(kind='scatter', x=x_col, y=y_col, color=col[i+1], label=cl[i+1], ax=fig)
+
+    fig.set_xlabel(x_col)
+    fig.set_ylabel(y_col)
+    fig.set_title(x_col + " vs. " + y_col)
+    fig=plt.gcf()
+    fig.set_size_inches(10, 8)
+    plt.show()
+
 
 def myhist(a):
     a.hist(edgecolor='black', linewidth=1.2)
@@ -59,8 +85,8 @@ def myviolinplot(df, a, b):
 #예)히트맵으로 성별과 가장 상관관계가 높은 필드(발크기,
 # 몸무게, 키 등)를 알 수 있음.
 def heatmap(df):
-    plt.figure(figsize=(10,5))
-    sns.heatmap(df.corr(),annot=True,cmap='cubehelix_r')
+    plt.figure(figsize=(14, 8))
+    sns.heatmap(df.corr(), annot=True, cmap='cubehelix_r')
     plt.show()
 
 #전체데이터를 학습용(70%), 테스트 용(30%)으로 나눔
