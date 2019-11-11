@@ -145,3 +145,5 @@ def run_decision_tree_classifier (df, list, target):
     prediction = baby1.predict(test_X)  # 테스트
 
     print('인식률:', metrics.accuracy_score(prediction, test_y) * 100)
+
+
